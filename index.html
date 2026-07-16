@@ -9,18 +9,19 @@
 <style>
   :root{
     --bg:#F5F6F3; --card:#FFF; --ink:#111C24; --sub:#5A6B77; --line:#E2E6E0;
-    --paper:#EEF0EA; --bto:#2E9E7E; --btoB:#5CBFA0; --hdb:#0E6E5C; --hdbB:#3E8E7B;
-    --prv:#B4690E; --eq:#2E4FD8; --mix:#6B7A99; --red:#C81E3C; --lose:#8FA3F5;
+    --paper:#EEF0EA; --bto:#2E9E7E; --hdb:#0E6E5C; --prv:#B4690E;
+    --eq:#2E4FD8; --mix:#6B7A99; --red:#C81E3C; --lose:#8FA3F5;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-size:14px}
   .wrap{max-width:720px;margin:0 auto;padding:18px 12px 70px}
   h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:27px;line-height:1.14;margin:0 0 8px}
+  h3{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;margin:0 0 6px}
   .lede{color:var(--sub);font-size:13.5px;line-height:1.55;margin:0 0 16px}
   .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 14px;margin-bottom:12px}
   .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--sub);margin-bottom:8px;line-height:1.5}
   .seg{display:inline-flex;background:var(--paper);border-radius:10px;padding:3px;gap:2px;flex-wrap:wrap;max-width:100%}
-  .seg button{border:none;cursor:pointer;border-radius:8px;padding:8px 11px;font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600;background:transparent;color:var(--sub);min-height:38px;transition:background .15s}
+  .seg button{border:none;cursor:pointer;border-radius:8px;padding:8px 11px;font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;font-weight:600;background:transparent;color:var(--sub);min-height:38px}
   .seg button.on{background:var(--ink);color:#fff}
   .sticky{position:sticky;top:8px;z-index:5;box-shadow:0 3px 14px rgba(17,28,36,.07)}
   .ctl{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
@@ -36,27 +37,52 @@
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:13px}
   .grid2 .lbl{color:var(--sub);font-size:11px;font-family:'IBM Plex Sans',sans-serif}
   .big{font-weight:600;font-size:17px}
-  table{border-collapse:collapse;width:100%;font-family:'IBM Plex Mono',monospace;font-size:12px;min-width:430px}
+  table{border-collapse:collapse;width:100%;font-family:'IBM Plex Mono',monospace;font-size:12px}
   th{font-weight:600;font-size:10.5px;padding:6px 4px;text-align:right}
   td{padding:8px 4px;text-align:right;border-top:1px solid var(--line)}
   td:first-child,th:first-child{text-align:left;color:var(--sub)}
   td.win{font-weight:600;background:rgba(14,110,92,.09)}
   .scroll{overflow-x:auto}
-  .note{font-size:11px;color:var(--sub);margin-top:6px}
+  .note{font-size:11px;color:var(--sub);margin-top:6px;line-height:1.55}
   .btn{border:1px solid var(--line);background:var(--paper);border-radius:8px;font-size:12px;padding:8px 14px;cursor:pointer;color:var(--ink);font-family:'IBM Plex Mono',monospace;min-height:38px}
   .row{display:flex;justify-content:space-between;align-items:center}
   .agrid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
   .agrid label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--sub)}
   .agrid input{width:100%;max-width:110px;padding:10px 9px;border-radius:9px;border:1px solid var(--line);font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink);background:#FCFCFA}
-  .bfrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:2;display:flex;justify-content:space-between;gap:10px}
-  .bftot{border-top:1px solid var(--line);font-weight:600}
-  .drag{margin-top:10px;padding:10px 12px;background:var(--paper);border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:1.7}
+  .readout{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--sub);background:var(--paper);display:inline-block;padding:3px 8px;border-radius:6px;margin-bottom:6px}
+  .tabbar{display:flex;gap:6px;margin:0 0 14px;background:var(--paper);padding:4px;border-radius:12px}
+  .tabbar button{flex:1;border:none;cursor:pointer;border-radius:9px;padding:11px 6px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;background:transparent;color:var(--sub);min-height:44px}
+  .tabbar button.on{background:var(--ink);color:#fff}
   ul{font-size:12px;color:var(--sub);line-height:1.65;padding-left:18px;margin:0}
+  a{color:var(--eq)}
   input:focus,button:focus-visible{outline:2px solid var(--eq);outline-offset:1px}
   canvas{max-width:100%}
-  .tabbar{display:flex;gap:6px;margin:0 0 14px;background:var(--paper);padding:4px;border-radius:12px}
-  .tabbar button{flex:1;border:none;cursor:pointer;border-radius:9px;padding:11px 8px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;background:transparent;color:var(--sub);min-height:44px}
-  .tabbar button.on{background:var(--ink);color:#fff}
+  /* analysis tab */
+  .chips{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .chip{background:var(--paper);border-radius:12px;padding:12px 11px}
+  .chip .t{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;line-height:1.25}
+  .chip .s{font-size:11px;color:var(--sub);margin-top:4px;line-height:1.45}
+  .force{margin:8px 0}
+  .force .frow{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+  .force .fbar{height:14px;border-radius:4px}
+  .force .flbl{font-size:12px;line-height:1.35}
+  .fhalf{width:50%}
+  .fL{display:flex;justify-content:flex-end}
+  details{margin:6px 0;border-left:3px solid var(--line);padding-left:10px}
+  summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--ink);padding:4px 0}
+  details p{font-size:12.5px;color:var(--sub);line-height:1.6;margin:6px 0}
+  .steps{display:flex;flex-direction:column;gap:8px}
+  .step{display:flex;gap:10px;background:var(--paper);border-radius:12px;padding:11px}
+  .step .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;color:var(--hdb);min-width:24px}
+  .step .b{font-size:12.5px;line-height:1.5}
+  .step .b b{display:block;font-size:13px;margin-bottom:2px}
+  .cmp td{text-align:left;font-family:'IBM Plex Sans',sans-serif;font-size:12px;line-height:1.45;vertical-align:top}
+  .cmp th{text-align:left;font-family:'Space Grotesk',sans-serif;font-size:12px}
+  .wf .wrow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .wf .wlbl{width:44%;font-size:12px;line-height:1.3}
+  .wf .wbarwrap{flex:1;background:var(--paper);border-radius:4px;height:16px;position:relative}
+  .wf .wbar{position:absolute;top:0;height:16px;border-radius:4px}
+  .wf .wval{font-family:'IBM Plex Mono',monospace;font-size:11px;min-width:64px;text-align:right}
   @media (prefers-reduced-motion: reduce){*{transition:none!important}}
 </style>
 </head>
@@ -64,48 +90,58 @@
 <div class="wrap">
   <div class="eyebrow" style="color:var(--red)">Singapore · buyer vs renter-investor · 1995–2025 · SGD</div>
   <h1>The roof or the world index?</h1>
-  <p class="lede">Five buying strategies against a renter who invests the same cash and the same monthly budget in a global portfolio. Full costs both sides. Every rolling window scored.</p>
+  <p class="lede">Buyer and renter earn the same median income, hold the same starting cash, and invest every spare dollar in the same global portfolio. Full costs both sides. Every rolling window scored.</p>
 
   <div class="tabbar">
     <button id="tabBtn1" class="on">Buy vs invest</button>
     <button id="tabBtn2">Affordability</button>
+    <button id="tabBtn3">Why SG differs</button>
   </div>
 
+  <!-- ============================ TAB 1 ============================ -->
   <div id="tab1">
+
+  <div class="card">
+    <div class="eyebrow">Assumptions (stated up front) · <span id="asmpDyn"></span></div>
+    <ul id="asmpList"></ul>
+  </div>
+
   <div class="card sticky">
     <div class="ctl">
       <div><div class="eyebrow">Holding period</div><div class="seg" id="segLen"></div></div>
       <div><div class="eyebrow">Renter invests in</div><div class="seg" id="segBench"></div></div>
-      <div><div class="eyebrow">Money terms</div><div class="seg" id="segReal"></div></div>
+      <div><div class="eyebrow">Income basis</div><div class="seg" id="segBasis"></div></div>
     </div>
   </div>
 
   <div class="card">
     <div class="eyebrow" style="color:var(--ink)" id="stripTitle"></div>
-    <div class="note" style="margin:0 0 10px">Solid tick = buyer ended wealthier · pale indigo = renter-investor won · tap a strategy to inspect it.</div>
+    <div class="note" style="margin:0 0 10px">Solid tick = buyer ended wealthier · pale indigo = renter-investor won · tap a strategy to inspect it below.</div>
     <div id="strips"></div>
   </div>
 
   <div class="card">
     <div class="eyebrow" id="spreadTitle"></div>
+    <span class="readout" id="spreadReadout"></span>
     <div style="height:215px"><canvas id="spreadChart"></canvas></div>
-    <div class="note">Edge = buyer's terminal net wealth ÷ renter-investor's, minus 1. Tap bars for S$ values.</div>
+    <div class="note">Edge = buyer's terminal wealth ÷ renter's, minus 1. Tap bars for S$ values.</div>
   </div>
 
-  <div class="card" id="detailCard"></div>
+  <div class="card" id="auditCard"></div>
+  <div class="card" id="wfCard"></div>
 
   <div class="card">
     <div class="eyebrow" id="mxTitle"></div>
-    <div class="scroll"><table id="matrix"></table></div>
+    <div class="scroll"><table id="matrix" style="min-width:430px"></table></div>
     <div class="note">Shaded = buyer won at least half of all start years.</div>
   </div>
 
   <div class="card" id="bfCard" style="border-left:4px solid var(--hdb)"></div>
 
   <div class="card">
-    <div class="row"><div class="eyebrow">All costs, both sides</div><button class="btn" id="assumpBtn">edit</button></div>
-    <div class="note" style="font-size:12px;line-height:1.6" id="assumpSummary"></div>
-    <div class="drag" id="dragImpact"></div>
+    <div class="row"><div class="eyebrow">All costs, both sides (editable)</div><button class="btn" id="assumpBtn">edit</button></div>
+    <div class="note" style="font-size:12px" id="assumpSummary"></div>
+    <div class="drag note" style="margin-top:10px;padding:10px 12px;background:var(--paper);border-radius:10px;font-family:'IBM Plex Mono',monospace;font-size:12.5px" id="dragImpact"></div>
     <div class="agrid" id="assumpGrid" style="display:none"></div>
   </div>
 
@@ -114,23 +150,23 @@
     <div id="ctxBody" style="display:none">
       <div style="display:flex;justify-content:flex-end;margin:8px 0"><button class="btn" id="logBtn" style="padding:6px 10px;font-size:11px;min-height:0">log scale</button></div>
       <div style="height:235px"><canvas id="growthChart"></canvas></div>
-      <div class="note">Growth of S$100k, price indices only (no yield, no leverage). The levered view above, not this chart, is the decision-relevant one.</div>
+      <div class="note">Growth of S$100k, price indices only (no yield, no leverage, no income).</div>
     </div>
-  </div>
-
-  <div class="card">
-    <div class="eyebrow">Method, data, and what is still not modelled</div>
-    <ul>
-      <li>Buyer and renter start with identical cash and identical annual housing budgets; whoever spends less invests the difference in the benchmark. Bank loans reprice annually on the historical rate series (approximate SIBOR/SORA-era averages).</li>
-      <li>HDB RPI is official; URA private 2004–2025 verified, 1994–2003 reconstructed. MSCI World gross USD converted at year-end FX; drag inputs convert gross to a realistic net for an Irish-UCITS investor (e.g. IWDA/VWRA).</li>
-      <li>Modelled: CPF accrued-interest refund at 2.5% on the CPF-funded share (locked liquidity, not lost wealth), HDB lease-decay drag (default 0.5%/yr vs the index), behavioural-gap control (baseline: fully disciplined renter at 100%), real-terms view via SG CPI.</li>
-      <li>Still excluded, favouring the renter-investor: ABSD on second properties, SSD inside 3 years, single-flat dispersion beyond the decay input. Still excluded, favouring the buyer: the rent-inflation hedge of fixed housing costs.</li>
-      <li>Grants and BTO discounts vary by income, flat type and era; defaults are mid-range.</li>
-    </ul>
   </div>
   </div><!-- /tab1 -->
 
+  <!-- ============================ TAB 2 ============================ -->
   <div id="tab2" style="display:none">
+    <div class="card">
+      <div class="eyebrow">Assumptions (stated up front)</div>
+      <ul>
+        <li>Prices for each year are your 2025 anchor prices scaled by the official quality-adjusted index for that housing type; BTO shown net of era-scaled discount and grant.</li>
+        <li>Income is the official MOM median gross monthly income of full-time employed residents, including employer CPF (appropriate here because CPF services housing). Household basis multiplies by a dual-income ratio drifting 1.65×→2.05× over 1995–2025 (estimate).</li>
+        <li>Servicing ratios use each year's actual interest rate: HDB concessionary 2.6% for flats, the reconstructed historical bank rate for condos; LTV and tenure come from the Buy-vs-invest tab's assumptions.</li>
+        <li>1995 income is extrapolated; 2000 and 2005 interpolated (survey not conducted).</li>
+      </ul>
+    </div>
+
     <div class="card sticky">
       <div class="ctl">
         <div><div class="eyebrow">Income basis</div><div class="seg" id="segIncome"></div></div>
@@ -140,35 +176,111 @@
 
     <div class="card">
       <div class="eyebrow" id="ptiTitle"></div>
+      <span class="readout" id="ptiReadout"></span>
       <div style="height:235px"><canvas id="ptiChart"></canvas></div>
-      <div class="note">Price ÷ annual income, using each year's actual price level (scaled from your 2025 anchor prices) and each year's median income. Lower is more affordable. BTO line is net of discount and grant.</div>
+      <div class="note">Price ÷ annual income, both at each year's actual level. Lower = more affordable. Immune to base-year and deflator choices.</div>
     </div>
 
     <div class="card">
       <div class="eyebrow" id="msrTitle"></div>
+      <span class="readout" id="msrReadout"></span>
       <div style="height:225px"><canvas id="msrChart"></canvas></div>
-      <div class="note">Monthly instalment ÷ monthly income at each year's price and that year's actual interest rate (HDB 2.6% for flats, historical bank rates for condos; LTV and tenure from your assumptions). Dashed line: the 30% mortgage-servicing ceiling MAS applies to HDB purchases today. This is the chart that shows why 2021's record prices were cheaper to carry than 1997's.</div>
+      <div class="note">Monthly instalment ÷ monthly income at that year's price and that year's interest rate. Dashed line: 30% MSR ceiling MAS applies to HDB purchases today. This is why 2021's record prices were cheaper to carry than 1997's.</div>
     </div>
 
     <div class="card">
       <div class="eyebrow" id="idxTitle"></div>
+      <span class="readout" id="idxReadout"></span>
       <div style="height:225px"><canvas id="idxChart"></canvas></div>
-      <div class="note">All series rebased to 100 in the chosen year. Switch the base year and watch the story change — this is why index-vs-index comparisons are easy to manipulate and why the ratio charts above are the more honest measure.</div>
+      <div class="note">All series rebased to 100 in the chosen year. Switch the base and watch the story change — the manipulation surface of index-vs-index comparisons, made visible.</div>
     </div>
 
     <div class="card" id="affStats"></div>
+  </div><!-- /tab2 -->
+
+  <!-- ============================ TAB 3 ============================ -->
+  <div id="tab3" style="display:none">
 
     <div class="card">
-      <div class="eyebrow">Data & caveats for this tab</div>
-      <ul>
-        <li>Income: official MOM median gross monthly income of full-time employed residents, incl. employer CPF (1996–2025). 1995 extrapolated; 2000 and 2005 interpolated (survey not run those years). Includes employer CPF, which is appropriate here since CPF services housing.</li>
-        <li>Household basis multiplies individual income by a ratio drifting from ~1.65× (1995) to ~2.05× (2025), reflecting the rise of dual-income households — note this coping mechanism is itself part of the affordability story.</li>
-        <li>Prices are index-scaled from your 2025 anchor prices, so levels inherit the quality-adjusted index; actual median transacted prices also shifted with flat sizes and mix.</li>
-        <li>Real-wages framing: deflating both wages and prices by CPI cancels out in any ratio — price-to-income and servicing ratios are already the real comparison.</li>
-        <li>Median full-time income excludes part-timers and the unemployed; affordability for those groups is worse than shown.</li>
-      </ul>
+      <div class="eyebrow">In one screen · why the textbook rent-vs-buy answer breaks here</div>
+      <div class="chips">
+        <div class="chip"><div class="t">The state is the developer</div><div class="s">~78% live in HDB flats sold below market with grants. The first buyer's "return" starts with a fiscal transfer, not a market gain.</div></div>
+        <div class="chip"><div class="t">Nobody's gains are taxed</div><div class="s">No capital gains tax on homes or ETFs. The Canadian tax-shelter argument for owning simply doesn't exist here.</div></div>
+        <div class="chip"><div class="t">CPF changes the hurdle</div><div class="s">The median buyer's alternative for housing money is CPF OA at 2.5%, not equities at ~8%. That collapses the renter's advantage.</div></div>
+        <div class="chip"><div class="t">Policy caps both tails</div><div class="s">Cooling measures cap booms; supply control cushions busts. Property behaves like an inflation-linked bond with a policy collar.</div></div>
+      </div>
     </div>
-  </div><!-- /tab2 --></div>
+
+    <div class="card">
+      <div class="eyebrow">The thumb on the scale · what pushes each way in Singapore</div>
+      <div class="force" id="forceDiag"></div>
+      <div class="note">Bar length = rough weight of each force in the dashboard's results (from the decomposition and toggles on the first tab, at default settings). Push a toggle there and watch these forces express themselves in the win-strips.</div>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Singapore vs a typical developed market</div>
+      <div class="scroll">
+      <table class="cmp" style="min-width:480px">
+        <thead><tr><th style="width:26%"></th><th style="width:37%;color:var(--hdb)">Singapore</th><th style="width:37%;color:var(--sub)">Canada / US / UK / Australia</th></tr></thead>
+        <tbody>
+          <tr><td>Who supplies housing</td><td>State builds and prices most of it; BTO sold below market + grants</td><td>Private developers at market prices; first-time buyers pay a bidding premium</td></tr>
+          <tr><td>Tax on gains</td><td>None on either asset; heavy stamp duty on churn instead</td><td>Primary-home CGT exemption is the core pro-ownership subsidy; ETFs taxed</td></tr>
+          <tr><td>Status of renting</td><td>Structurally penalised: forfeits grants and BTO queue, thin local rental stock, weak tenure</td><td>Viable lifelong choice (Germany, Switzerland: ~50% rent with strong tenant rights)</td></tr>
+          <tr><td>Savings–housing link</td><td>CPF hard-wires forced savings to home purchase; homes are the median household's only leverage</td><td>Pensions separate from housing; leverage available on any asset via margin/HELOC</td></tr>
+          <tr><td>Volatility regime</td><td>Policy-collared: ABSD/LTV/SSD kill booms, supply control cushions busts</td><td>Credit-cycle driven: 2008-style crashes and Sydney-style melt-ups both possible</td></tr>
+          <tr><td>Asset horizon</td><td>99-year leases amortise to zero; value decays with age</td><td>Freehold dominant; "home as perpetual wealth store" mostly holds</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <details><summary>Expert note: what this does to expected returns</summary>
+        <p>Suppressed volatility plus capped upside means Singapore residential property is best modelled not as an equity-like asset but as a leveraged, inflation-tracking bond with an embedded policy put and call. Its unlevered Sharpe ratio is respectable; its unlevered return is not. Everything interesting in the first tab comes from the financing and subsidy structure around it, not the asset itself — HDB prices compounded ~3.4% and private ~2.2% over 1995–2025 versus ~7–8% for global equities in SGD.</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">Two constraints, two charts · how to read the affordability tab</div>
+      <div class="steps">
+        <div class="step"><div class="n">S</div><div class="b"><b>Stock constraint — years-of-income chart</b>How long to accumulate the downpayment. Driven by price-to-income. This is what people mean when they say "housing is unaffordable."</div></div>
+        <div class="step"><div class="n">F</div><div class="b"><b>Flow constraint — servicing-ratio chart</b>Can this month's income carry this month's instalment at this year's interest rate. This is what MAS actually regulates (30% MSR), and it moves opposite to prices when rates swing: 2021's record prices were cheaper to carry than 1997's.</div></div>
+      </div>
+      <details><summary>Expert note: the three traps the affordability tab is built to avoid</summary>
+        <p>1) <b>Deflator cancellation:</b> real price ÷ real wage = nominal price ÷ nominal wage; CPI divides out. Ratio charts are already the real comparison. 2) <b>Base-year gambling:</b> any index-vs-index chart can be tuned to a narrative by picking the base; the selector exposes this instead of hiding it. 3) <b>Unit mismatch:</b> individuals earn wages, households buy flats; the household multiplier rose ~1.65×→2.05× as dual incomes became the norm — which flatters affordability while embedding the coping mechanism in the measure. Both bases are shown for that reason.</p>
+      </details>
+      <details><summary>Expert note: the finding most people don't expect</summary>
+        <p>Over the full 30 years, median incomes (~3.9%/yr nominal) outgrew both HDB (~3.4%) and private (~2.2%) price indices. The squeeze is real but episodic — 1993–96, 2007–13, 2020–24 — and the conclusion only holds for continuously employed full-time residents, from a 1995 base that sits mid-boom. Shift the base to 1990 or drop to part-time workers and it weakens. Precision about the claim is the difference between analysis and narrative.</p>
+      </details>
+    </div>
+
+    <div class="card">
+      <div class="eyebrow">The rational Singapore playbook that falls out of the numbers</div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div class="b"><b>Take the subsidised first property</b>The BTO discount and grant are a one-time state transfer you cannot get any other way; era-scaled, they explain most of the buyer's edge in the decomposition below the bar chart on tab one.</div></div>
+        <div class="step"><div class="n">2</div><div class="b"><b>Finance it with cheap, capped leverage</b>The HDB loan at 2.6% against CPF money earning 2.5% is nearly free carry. The mortgage doubles as forced saving — the behavioural gap toggle shows how much that discipline is worth.</div></div>
+        <div class="step"><div class="n">3</div><div class="b"><b>Send every further dollar to global markets</b>ABSD makes a second property punitively expensive, and unlevered SG property lags world equities badly. The video's "home as diversifier" point lands here: once the flat is secured, the marginal dollar belongs in the index.</div></div>
+      </div>
+      <details><summary>Simple summary (for a beginner audience)</summary>
+        <p>In most countries, rent-and-invest vs buy is a close call. In Singapore, the government pays you to buy your first home and taxes you heavily for buying a second. So: take the subsidised flat, use the cheap loan, and invest everything else in a low-cost world ETF. Don't treat property as your growth engine — treat it as your stability, and let the world index do the compounding.</p>
+      </details>
+    </div>
+  </div><!-- /tab3 -->
+
+  <!-- ============================ SOURCES (all tabs) ============================ -->
+  <div class="card">
+    <div class="eyebrow">Data sources</div>
+    <ul>
+      <li><b>HDB Resale Price Index</b> (official, quarterly, 1Q2009=100; Q4 values used): <a href="https://www.hdb.gov.sg/residential/selling-a-flat/overview/resale-statistics" target="_blank">hdb.gov.sg resale statistics</a></li>
+      <li><b>URA Private Residential Property Price Index</b>: <a href="https://www.ura.gov.sg/Corporate/Property/Property-Data" target="_blank">ura.gov.sg property data</a> / <a href="https://data.gov.sg/collections/1818/view" target="_blank">data.gov.sg</a>. 2004–2025 chained from published annual changes and verified against official anchors; 1994–2003 reconstructed from published annual changes (indicative).</li>
+      <li><b>MSCI World Index</b> gross total returns, USD (official factsheet figures): <a href="https://www.msci.com/indexes" target="_blank">msci.com</a>. Converted to SGD at year-end FX.</li>
+      <li><b>Global bonds</b>: Bloomberg Global Aggregate (USD), approximate annual returns from published sources.</li>
+      <li><b>Median income</b> (gross monthly, full-time employed residents, incl. employer CPF, 1996–2025): <a href="https://data.gov.sg/datasets/d_52760e82e8786bac11cca40eb29d1a93/view" target="_blank">SingStat/MOM via data.gov.sg</a>. 1995 extrapolated; 2000, 2005 interpolated.</li>
+      <li><b>CPI inflation</b>: Singapore Department of Statistics, <a href="https://www.singstat.gov.sg/find-data/search-by-theme/economy/prices-and-price-indices" target="_blank">singstat.gov.sg</a> (approximate annual figures).</li>
+      <li><b>USD/SGD</b>: year-end rates (MAS/market data); 2025 approximate.</li>
+      <li><b>Bank mortgage rates</b>: reconstructed annual averages from SIBOR/SORA + typical spreads — my estimate, not an official series. HDB concessionary rate: CPF OA + 0.1% = 2.6%.</li>
+      <li><b>Buyer's Stamp Duty tiers</b>: <a href="https://www.iras.gov.sg/taxes/stamp-duty/for-property/buying-or-acquiring-property/buyer's-stamp-duty-(bsd)" target="_blank">iras.gov.sg</a> (current residential tiers applied to all eras — a simplification).</li>
+      <li><b>Framework reference</b>: Ben Felix / PWL Capital rent-vs-buy analyses (5% rule, unrecoverable costs), recalibrated to Singapore inputs.</li>
+    </ul>
+  </div>
+</div>
 
 <script>
 /* ================= DATA (year-end, 1994–2025) ================= */
@@ -179,15 +291,13 @@ const GBND_USD={1995:19.7,1996:4.9,1997:3.8,1998:13.7,1999:-5.2,2000:3.2,2001:1.
 const USDSGD={1994:1.461,1995:1.414,1996:1.400,1997:1.677,1998:1.661,1999:1.666,2000:1.732,2001:1.848,2002:1.737,2003:1.701,2004:1.634,2005:1.664,2006:1.534,2007:1.441,2008:1.438,2009:1.404,2010:1.288,2011:1.297,2012:1.222,2013:1.265,2014:1.325,2015:1.418,2016:1.447,2017:1.337,2018:1.363,2019:1.345,2020:1.322,2021:1.349,2022:1.340,2023:1.320,2024:1.365,2025:1.290};
 const BANK_RATE={1995:6.3,1996:6.3,1997:6.8,1998:7.0,1999:5.0,2000:5.8,2001:4.6,2002:4.0,2003:3.6,2004:3.6,2005:3.9,2006:4.1,2007:3.8,2008:3.4,2009:2.6,2010:2.1,2011:1.9,2012:1.6,2013:1.6,2014:1.8,2015:2.0,2016:2.1,2017:1.9,2018:2.2,2019:2.4,2020:1.6,2021:1.3,2022:3.0,2023:4.1,2024:3.2,2025:2.6};
 const SG_CPI={1995:1.7,1996:1.4,1997:2.0,1998:-0.3,1999:0.0,2000:1.3,2001:1.0,2002:-0.4,2003:0.5,2004:1.7,2005:0.5,2006:1.0,2007:2.1,2008:6.6,2009:0.6,2010:2.8,2011:5.2,2012:4.6,2013:2.4,2014:1.0,2015:-0.5,2016:-0.5,2017:0.6,2018:0.4,2019:0.6,2020:-0.2,2021:2.3,2022:6.1,2023:4.8,2024:2.4,2025:1.0};
-/* MOM median gross monthly income, full-time employed residents, incl employer CPF.
-   Official 1996–2025; 1995 extrapolated (*), 2000 & 2005 interpolated (survey not run). */
 const WAGE={1995:1850,1996:1950,1997:2078,1998:2240,1999:2026,2000:2205,2001:2387,2002:2380,2003:2410,2004:2326,2005:2388,2006:2449,2007:2543,2008:2897,2009:2927,2010:3000,2011:3249,2012:3480,2013:3705,2014:3770,2015:3949,2016:4056,2017:4232,2018:4437,2019:4563,2020:4534,2021:4680,2022:5070,2023:5197,2024:5500,2025:5775};
-const hhMult=y=>1.65+(y-1995)/30*0.40; // household-to-individual income ratio drift
+const hhMult=y=>1.65+(y-1995)/30*0.40;
 
 /* ================= HELPERS ================= */
 const cumCPI=(s,e)=>{let f=1;for(let y=s+1;y<=e;y++)f*=1+SG_CPI[y]/100;return f;};
 const fmtPct=(x,d=1)=>(x*100).toFixed(d)+"%";
-const fmtSGD=x=>"S$"+Math.round(x).toLocaleString("en-SG");
+const fmtSGD=x=>(x<0?"−S$":"S$")+Math.round(Math.abs(x)).toLocaleString("en-SG");
 const fmtK=x=>Math.abs(x)>=1e6?(x/1e6).toFixed(2)+"M":Math.round(x/1000)+"k";
 function buildSeries(drag){
   const eq={},bd={},mx={},hd={},pv={};
@@ -209,30 +319,40 @@ function bsd(p){
   return tax;
 }
 
-/* ================= ENGINE ================= */
-function runWindow(cfg,S,scen,loanType,benchKey,start,end){
+/* ================= ENGINE (income-anchored) =================
+   Both parties: same starting cash (the buyer's required outlay),
+   same income, same annual housing+investing budget = budgetShare × income.
+   Buyer pays instalment+outgoings; renter pays rent; each invests what is
+   left of the budget (floored at 0) in the benchmark. Grants and the BTO
+   discount are era-scaled. */
+function runWindow(cfg,S,scen,loanType,benchKey,start,end,ov={}){
   const N=end-start, isPrv=scen==="prv";
   const idx=isPrv?URA_PPI:HDB_RPI;
   const priceToday=isPrv?cfg.condoPrice:cfg.hdbPrice;
   const P=y=>priceToday*idx[y]/idx[2025];
-  let contract=P(start); if(scen==="bto")contract*=1-cfg.btoDiscount;
-  const grant=isPrv?0:cfg.grant;
+  const era=HDB_RPI[start]/HDB_RPI[2025];
+  const disc=ov.disc!==undefined?ov.disc:cfg.btoDiscount;
+  const discS=scen==="bto"?P(start)*disc:0;
+  let contract=P(start)-discS;
+  const grant=isPrv?0:(ov.grant!==undefined?ov.grant:cfg.grant)*era;
   const ltv=loanType==="hdb"?cfg.hdbLTV:cfg.condoLTV;
   let balance=ltv*contract;
-  const reno=cfg.reno*idx[start]/idx[2025];
-  const cash0=contract-balance-grant+bsd(contract)+cfg.buyCost*contract+reno;
-  if(cash0<=0)return {valid:false};
+  const reno=cfg.reno*(idx[start]/idx[2025]);
+  const cash0=Math.max(1000,contract-balance-grant+bsd(contract)+cfg.buyCost*contract+reno);
   const decay=isPrv?0:cfg.leaseDecay;
   const yieldRate=isPrv?cfg.condoYield:cfg.hdbYield;
   const outRate=(isPrv?cfg.condoOutgo:cfg.hdbOutgo)+cfg.insurance;
   const bench=benchKey==="mix"?S.mixSGD:S.eqSGD;
-  let renterCore=cash0,renterPort=0,ownerPort=0,yearsLeft=cfg.tenure,decayF=1;
-  let totI=0,totR=0,totO=0;
+  const inc=y=>12*WAGE[y]*(cfg.incomeBasis==="hh"?hhMult(y):1);
+
+  let renterCore=cash0,renterPort=0,buyerPort=0,yearsLeft=cfg.tenure,decayF=1;
+  let totI=0,totRent=0,totOut=0,totPay=0,sumBInv=0,sumRInv=0,breach=0;
   let cpfUsed=cfg.cpfShare*(contract-balance)+grant;
+
   for(let y=start+1;y<=end;y++){
     const r=bench[y];
     renterCore*=1+(cfg.capitalSource==="cpf"?0.025:r);
-    renterPort*=1+r; ownerPort*=1+r;
+    renterPort*=1+r; buyerPort*=1+r;
     let pay=0;
     if(balance>0&&yearsLeft>0){
       const rate=loanType==="hdb"?cfg.hdbRate:(cfg.useHistBank?BANK_RATE[y]/100:cfg.bankRate);
@@ -246,18 +366,22 @@ function runWindow(cfg,S,scen,loanType,benchKey,start,end){
     const avgVal=(P(y-1)+P(y))/2*decayF;
     const outgo=outRate*avgVal;
     const rent=yieldRate*avgVal*(1+cfg.rentFriction);
-    totR+=rent; totO+=outgo;
+    totRent+=rent; totOut+=outgo; totPay+=pay;
     cpfUsed=cpfUsed*1.025+cfg.cpfShare*pay;
-    const diff=pay+outgo-rent;
-    if(diff>0)renterPort+=diff*cfg.investShare;
-    else ownerPort+=-diff*cfg.investShare;
+    const B=cfg.budgetShare*inc(y);
+    if(pay+outgo>B)breach++;
+    const bInv=Math.max(0,B-pay-outgo)*cfg.investShare;
+    const rInv=Math.max(0,B-rent)*cfg.investShare;
+    buyerPort+=bInv; renterPort+=rInv;
+    sumBInv+=bInv; sumRInv+=rInv;
   }
   const saleNet=P(end)*decayF*(1-cfg.sellCost)-balance;
   const cpfRefund=Math.min(cpfUsed,Math.max(0,saleNet));
-  const ownerWealth=saleNet+ownerPort, renterWealth=renterCore+renterPort;
-  return {valid:!(scen==="bto"&&N<5),ownerWealth,renterWealth,cash0,
-    ownerLiquid:saleNet-cpfRefund+ownerPort,cpfRefund,
-    edge:ownerWealth/renterWealth-1,totI,totR,totO};
+  const buyerWealth=saleNet+buyerPort, renterWealth=renterCore+renterPort;
+  return {valid:!(scen==="bto"&&N<5),buyerWealth,renterWealth,cash0,
+    buyerLiquid:saleNet-cpfRefund+buyerPort,cpfRefund,discS,grant,
+    edge:buyerWealth/renterWealth-1,diff:buyerWealth-renterWealth,
+    totI,totRent,totOut,totPay,sumBInv,sumRInv,saleNet,buyerPort,renterPort,renterCore,breach};
 }
 
 /* ================= STATE ================= */
@@ -271,23 +395,36 @@ const META={
   "prv-bank":{label:"Private condo · bank loan",color:"#B4690E"},
 };
 const state={
-  winLen:10,bench:"eq",real:false,sel:"bto-hdb",log:true,
+  winLen:10,bench:"eq",sel:"bto-hdb",log:true,
   cfg:{
     hdbPrice:600000,condoPrice:1600000,btoDiscount:.25,grant:40000,
     hdbLTV:.80,condoLTV:.75,hdbRate:.026,bankRate:.028,useHistBank:true,tenure:25,
     hdbYield:.05,condoYield:.032,hdbOutgo:.005,condoOutgo:.009,
     insurance:.001,reno:40000,leaseDecay:.005,buyCost:.005,sellCost:.02,rentFriction:.02,
     ter:.002,wht:.0025,txn:.0005,capitalSource:"cash",cpfShare:.8,investShare:1.0,
+    incomeBasis:"hh",budgetShare:.40,
   },
 };
-const LOSE="#8FA3F5", EQCOL="#2E4FD8", MIXCOL="#6B7A99";
+const LOSE="#8FA3F5",EQCOL="#2E4FD8",MIXCOL="#6B7A99";
 let S,S0=buildSeries(0),runAll={};
-let spreadChart=null,growthChart=null;
+const aff={tab:1,income:"hh",base:1995};
+
+/* ================= CHART UPSERT (mutate + update, no destroy) ================= */
+if(window.Chart){Chart.defaults.animation=false;Chart.defaults.font.family="'IBM Plex Sans',sans-serif";}
+const charts={};
+function upsert(id,type,data,options){
+  if(charts[id]){
+    charts[id].config.data=data;
+    if(options)Object.assign(charts[id].config.options,options);
+    charts[id].update();
+  }else{
+    charts[id]=new Chart(document.getElementById(id),{type,data,options});
+  }
+}
 
 /* ================= COMPUTE ================= */
 function recompute(){
-  const drag=state.cfg.ter+state.cfg.wht+state.cfg.txn;
-  S=buildSeries(drag);
+  S=buildSeries(state.cfg.ter+state.cfg.wht+state.cfg.txn);
   runAll={};
   for(const key of STRATS){
     const [scen,loan]=key.split("-");
@@ -296,14 +433,17 @@ function recompute(){
       const arr=[];
       for(let s=1995;s+L<=2025;s++){
         const r=runWindow(state.cfg,S,scen,loan,state.bench,s,s+L);
-        arr.push({start:s,end:s+L,win:r.valid!==false&&r.ownerWealth>r.renterWealth,valid:r.valid,r});
+        arr.push({start:s,end:s+L,win:r.valid!==false&&r.buyerWealth>r.renterWealth,valid:r.valid,r});
       }
       runAll[key][L]=arr;
     }
   }
 }
+const wins=k=>runAll[k][state.winLen];
+const benchLabel=()=>state.bench==="eq"?"MSCI World (SGD)":"60/40 (SGD)";
+const basisLabel=()=>state.cfg.incomeBasis==="hh"?"household (est.)":"individual";
 
-/* ================= RENDER ================= */
+/* ================= UI PRIMITIVES ================= */
 function seg(el,options,current,onPick){
   el.innerHTML="";
   for(const o of options){
@@ -314,92 +454,112 @@ function seg(el,options,current,onPick){
     el.appendChild(b);
   }
 }
-function benchLabel(){return state.bench==="eq"?"MSCI World (SGD)":"60/40 (SGD)";}
 
+/* ================= TAB 1 RENDERERS ================= */
+function renderAsmp(){
+  const c=state.cfg;
+  document.getElementById("asmpDyn").textContent=`income basis: ${basisLabel()} · budget ${Math.round(c.budgetShare*100)}% of income`;
+  document.getElementById("asmpList").innerHTML=`
+    <li><b>Same person, two lives.</b> Buyer and renter start with identical cash (the buyer's required outlay: downpayment + BSD + fees + renovation, after the grant), earn the same median income (${basisLabel()}, incl. employer CPF), and devote the same budget (${Math.round(c.budgetShare*100)}% of gross income) to housing + investing. Whatever the budget doesn't spend on housing is invested in ${benchLabel()} net of ETF costs.</li>
+    <li><b>Era-scaled subsidies.</b> The housing grant (${fmtSGD(c.grant)} in 2025 terms) and renovation are scaled back in time by the HDB index; the BTO discount (${fmtPct(c.btoDiscount,0)}) is a percentage and self-scales. Grants exist only if you buy — the renter forfeits them.</li>
+    <li><b>Financing.</b> HDB loan flat ${fmtPct(c.hdbRate)}; bank loans reprice yearly on reconstructed historical rates. Tenure ${c.tenure}y. CPF funds ${Math.round(c.cpfShare*100)}% of downpayment and instalments, accruing a 2.5% refund obligation on sale.</li>
+    <li><b>The flat itself.</b> Renter rents the same flat (gross yield ${fmtPct(c.hdbYield)} HDB / ${fmtPct(c.condoYield)} condo + ${fmtPct(c.rentFriction,0)} friction). Owner pays tax/S&CC/maintenance/insurance and a ${fmtPct(c.leaseDecay)} lease-decay drag (HDB), sells at ${fmtPct(c.sellCost)} cost. BTO can't sell inside 5 years (MOP).</li>
+    <li><b>Behaviour.</b> Baseline: both invest ${Math.round(c.investShare*100)}% of their surplus — a perfectly disciplined renter. Lower it in the editor to stress-test the discipline gap.</li>`;
+}
 function renderControls(){
   seg(document.getElementById("segLen"),LENS.map(L=>({v:L,label:L+"y"})),state.winLen,v=>{state.winLen=v;refresh(false);});
   seg(document.getElementById("segBench"),[{v:"eq",label:"MSCI World"},{v:"mix",label:"60/40"}],state.bench,v=>{state.bench=v;refresh(true);});
-  seg(document.getElementById("segReal"),[{v:false,label:"Nominal"},{v:true,label:"Real (CPI-adj)"}],state.real,v=>{state.real=v;refresh(false);});
+  seg(document.getElementById("segBasis"),[{v:"hh",label:"Household"},{v:"ind",label:"Individual"}],state.cfg.incomeBasis,v=>{state.cfg.incomeBasis=v;refresh(true);});
 }
-
 function renderStrips(){
   document.getElementById("stripTitle").textContent=`Who won each ${state.winLen}-year window? · vs ${benchLabel()}`;
   const host=document.getElementById("strips"); host.innerHTML="";
   for(const k of STRATS){
-    const m=META[k], wins=runAll[k][state.winLen];
-    const valid=wins.filter(w=>w.valid!==false), won=valid.filter(w=>w.win).length;
+    const m=META[k], w=wins(k);
+    const valid=w.filter(x=>x.valid!==false), won=valid.filter(x=>x.win).length;
     const pct=valid.length?Math.round(100*won/valid.length):0;
     const b=document.createElement("button");
     b.className="strip"+(state.sel===k?" on":"");
     b.innerHTML=`
-      <div class="hd">
-        <span class="nm"><span class="sw" style="background:${m.color}"></span>${m.label}</span>
-        <span class="sc" style="color:${valid.length&&won/valid.length>=.5?m.color:"var(--sub)"}">${won}/${valid.length} (${pct}%)</span>
-      </div>
-      <div class="ticks">${wins.map(w=>`<div title="${w.start}→${w.end}: ${w.valid===false?"n/a (MOP)":w.win?"buyer won":"renter-investor won"}" style="background:${w.valid===false?"var(--line)":w.win?m.color:LOSE};opacity:${w.valid===false?.5:w.win?1:.4}"></div>`).join("")}</div>
-      <div class="axis"><span>${wins[0].start}</span><span>window start year</span><span>${wins[wins.length-1].start}</span></div>`;
+      <div class="hd"><span class="nm"><span class="sw" style="background:${m.color}"></span>${m.label}</span>
+      <span class="sc" style="color:${valid.length&&won/valid.length>=.5?m.color:"var(--sub)"}">${won}/${valid.length} (${pct}%)</span></div>
+      <div class="ticks">${w.map(x=>`<div title="${x.start}→${x.end}: ${x.valid===false?"n/a (MOP)":x.win?"buyer won":"renter won"}" style="background:${x.valid===false?"var(--line)":x.win?m.color:LOSE};opacity:${x.valid===false?.5:x.win?1:.4}"></div>`).join("")}</div>
+      <div class="axis"><span>${w[0].start}</span><span>window start year</span><span>${w[w.length-1].start}</span></div>`;
     b.onclick=()=>{state.sel=k;refresh(false);};
     host.appendChild(b);
   }
 }
-
 function renderSpread(){
   const m=META[state.sel];
   document.getElementById("spreadTitle").textContent=`${m.label} · buyer's wealth edge over renter, by window start`;
   document.getElementById("spreadTitle").style.color=m.color;
-  const data=runAll[state.sel][state.winLen].filter(w=>w.valid!==false);
-  const labels=data.map(w=>"'"+String(w.start).slice(2));
-  const vals=data.map(w=>Math.round(w.r.edge*1000)/10);
-  if(spreadChart)spreadChart.destroy();
-  spreadChart=new Chart(document.getElementById("spreadChart"),{
-    type:"bar",
-    data:{labels,datasets:[{data:vals,backgroundColor:vals.map(v=>v>=0?m.color:LOSE),borderRadius:3}]},
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{
-        title:items=>{const d=data[items[0].dataIndex];return d.start+" → "+d.end;},
-        label:item=>{const d=data[item.dataIndex];
-          return `${item.parsed.y>0?"+":""}${item.parsed.y}% · buyer ${fmtK(d.r.ownerWealth)} vs renter ${fmtK(d.r.renterWealth)}`;}
-      }}},
-      scales:{
-        x:{grid:{display:false},ticks:{font:{family:"IBM Plex Mono",size:10},maxRotation:0,autoSkip:true}},
-        y:{ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v+"%"},grid:{color:"#EDEFEA"}},
-      },
-    },
+  document.getElementById("spreadReadout").textContent=`window ${state.winLen}y · vs ${benchLabel()} · ${basisLabel()} income`;
+  const data=wins(state.sel).filter(w=>w.valid!==false);
+  upsert("spreadChart","bar",{
+    labels:data.map(w=>"'"+String(w.start).slice(2)),
+    datasets:[{data:data.map(w=>Math.round(w.r.edge*1000)/10),
+      backgroundColor:data.map(w=>w.r.edge>=0?m.color:LOSE),borderRadius:3}],
+  },{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{
+      title:items=>{const d=data[items[0].dataIndex];return d.start+" → "+d.end;},
+      label:item=>{const d=data[item.dataIndex];
+        return `${item.parsed.y>0?"+":""}${item.parsed.y}% · buyer ${fmtK(d.r.buyerWealth)} vs renter ${fmtK(d.r.renterWealth)}`;}}}},
+    scales:{x:{grid:{display:false},ticks:{font:{family:"IBM Plex Mono",size:10},maxRotation:0,autoSkip:true}},
+      y:{ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v+"%"},grid:{color:"#EDEFEA"}}},
   });
 }
-
-function renderDetail(){
-  const m=META[state.sel];
-  const valid=runAll[state.sel][state.winLen].filter(w=>w.valid!==false);
-  const host=document.getElementById("detailCard");
-  if(!valid.length){host.innerHTML="<div class='note'>No valid windows at this length.</div>";return;}
-  const sorted=[...valid].sort((a,b)=>a.r.edge-b.r.edge);
-  const d=sorted[Math.floor(sorted.length/2)];
-  const defl=state.real?cumCPI(d.start,d.end):1;
-  const D=x=>fmtSGD(x/defl);
-  host.innerHTML=`
-    <div class="eyebrow">Median window · ${d.start} → ${d.end} · ${state.real?`real ${d.start} S$`:"nominal S$"}</div>
-    <div class="grid2">
-      <div><div class="lbl">Buyer ends with</div><div class="big" style="color:${m.color}">${D(d.r.ownerWealth)}</div></div>
-      <div><div class="lbl">Renter-investor ends with</div><div class="big" style="color:${EQCOL}">${D(d.r.renterWealth)}</div></div>
-      <div><div class="lbl">Upfront cash both deploy</div><div>${D(d.r.cash0)}</div></div>
-      <div><div class="lbl">Buyer's interest paid</div><div>${D(d.r.totI)}</div></div>
-      <div><div class="lbl">Rent avoided (cum.)</div><div>${D(d.r.totR)}</div></div>
-      <div><div class="lbl">Tax, maintenance, fees (cum.)</div><div>${D(d.r.totO)}</div></div>
-      <div><div class="lbl">Refund to CPF at sale (principal + 2.5%)</div><div style="color:var(--red)">${D(d.r.cpfRefund)}</div></div>
-      <div><div class="lbl">Buyer's cash-in-hand after CPF refund</div><div>${D(d.r.ownerLiquid)}</div></div>
-    </div>
-    <div class="note" style="margin-top:8px">The CPF refund goes back to your own OA — not lost wealth, but locked liquidity. Compare cash-in-hand against the renter's fully liquid portfolio if optionality matters.</div>`;
+function medianWin(){
+  const v=wins(state.sel).filter(w=>w.valid!==false);
+  if(!v.length)return null;
+  const s=[...v].sort((a,b)=>a.r.edge-b.r.edge);
+  return s[Math.floor(s.length/2)];
 }
-
+function renderAudit(){
+  const d=medianWin(), m=META[state.sel], host=document.getElementById("auditCard");
+  if(!d){host.innerHTML="<div class='note'>No valid windows.</div>";return;}
+  const r=d.r;
+  host.innerHTML=`
+    <div class="eyebrow">Every dollar accounted for · median window ${d.start} → ${d.end} · nominal S$</div>
+    <div class="scroll"><table>
+      <thead><tr><th></th><th style="color:${m.color}">Buyer</th><th style="color:${EQCOL}">Renter-investor</th></tr></thead>
+      <tbody>
+        <tr><td>Starting cash (identical)</td><td>${fmtSGD(r.cash0)} → into flat</td><td>${fmtSGD(r.cash0)} → invested</td></tr>
+        <tr><td>Subsidies received (era-scaled)</td><td>${r.discS?fmtSGD(r.discS)+" discount + ":""}${fmtSGD(r.grant)} grant</td><td>—</td></tr>
+        <tr><td>Housing paid over window</td><td>${fmtSGD(r.totPay+r.totOut)} (instalments ${fmtSGD(r.totPay)}, of which interest ${fmtSGD(r.totI)}; upkeep ${fmtSGD(r.totOut)})</td><td>${fmtSGD(r.totRent)} rent</td></tr>
+        <tr><td>Invested from income surplus</td><td>${fmtSGD(r.sumBInv)}</td><td>${fmtSGD(r.sumRInv)}</td></tr>
+        <tr><td>Portfolio at end</td><td>${fmtSGD(r.buyerPort)}</td><td>${fmtSGD(r.renterPort+r.renterCore)} (incl. starting cash grown)</td></tr>
+        <tr><td>Property sale, net of loan & costs</td><td>${fmtSGD(r.saleNet)}</td><td>—</td></tr>
+        <tr><td><b>End wealth</b></td><td class="win"><b>${fmtSGD(r.buyerWealth)}</b></td><td><b>${fmtSGD(r.renterWealth)}</b></td></tr>
+        <tr><td>of which locked as CPF refund</td><td style="color:var(--red)">${fmtSGD(r.cpfRefund)}</td><td>0 (fully liquid)</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note">${r.breach?`Budget breach: instalment + upkeep exceeded the ${Math.round(state.cfg.budgetShare*100)}% income budget in ${r.breach} year(s) — in reality this buyer stretches or gets a longer tenure.`:"Instalments stayed within the income budget every year."} The CPF refund returns to the buyer's own OA: locked liquidity, not lost wealth.</div>`;
+}
+function renderWaterfall(){
+  const d=medianWin(), host=document.getElementById("wfCard");
+  if(!d){host.innerHTML="";return;}
+  const [scen,loan]=state.sel.split("-");
+  const full=d.r.diff;
+  const noG=runWindow(state.cfg,S,scen,loan,state.bench,d.start,d.end,{grant:0}).diff;
+  const noD=runWindow(state.cfg,S,scen,loan,state.bench,d.start,d.end,{disc:0}).diff;
+  const gC=full-noG, dC=full-noD, resid=full-gC-dC;
+  const rows=[["BTO discount (era-scaled)",dC,"#2E9E7E"],["Housing grant (era-scaled)",gC,"#5CBFA0"],
+    ["Leverage, price growth, rent-vs-cost flows",resid,"#0E6E5C"],["Total buyer edge",full,"#111C24"]];
+  const mx=Math.max(...rows.map(r=>Math.abs(r[1])),1);
+  host.innerHTML=`<div class="eyebrow">Where the edge comes from · median window ${d.start} → ${d.end}</div>
+    <div class="wf">${rows.map(([l,v,c])=>`
+      <div class="wrow"><div class="wlbl">${l}</div>
+        <div class="wbarwrap"><div class="wbar" style="left:${v>=0?50:50-40*Math.abs(v)/mx}%;width:${40*Math.abs(v)/mx}%;background:${v>=0?c:"var(--lose)"}"></div>
+        <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:var(--line)"></div></div>
+        <div class="wval">${v>=0?"+":""}${fmtK(v)}</div></div>`).join("")}</div>
+    <div class="note">Sequential attribution: each subsidy's contribution is measured by removing it and re-running the window; the residual is everything else (cheap leverage on price growth, rent avoided vs interest and upkeep paid, timing). For non-BTO strategies the discount row is zero by construction.</div>`;
+}
 function renderMatrix(){
   document.getElementById("mxTitle").textContent=`Buyer win rate by holding period · vs ${benchLabel()}`;
-  const tbl=document.getElementById("matrix");
   let html="<thead><tr><th></th>"+STRATS.map(k=>{
-    const parts=META[k].label.split(" · ");
-    return `<th style="color:${META[k].color}">${parts[0]}<div>${parts[1].replace("HDB loan 2.6%","HDB ln").replace("bank loan","bank")}</div></th>`;
-  }).join("")+"</tr></thead><tbody>";
+    const p=META[k].label.split(" · ");
+    return `<th style="color:${META[k].color}">${p[0]}<div>${p[1].replace("HDB loan 2.6%","HDB ln").replace("bank loan","bank")}</div></th>`;}).join("")+"</tr></thead><tbody>";
   for(const L of LENS){
     html+=`<tr><td>${L}y</td>`;
     for(const k of STRATS){
@@ -410,9 +570,8 @@ function renderMatrix(){
     }
     html+="</tr>";
   }
-  tbl.innerHTML=html+"</tbody>";
+  document.getElementById("matrix").innerHTML=html+"</tbody>";
 }
-
 function renderBF(){
   const c=state.cfg, isPrv=state.sel.startsWith("prv");
   const ltv=state.sel.endsWith("hdb")?c.hdbLTV:c.condoLTV;
@@ -424,37 +583,33 @@ function renderBF(){
   const unrec=taxMaint+capCost-growthP;
   const gy=isPrv?c.condoYield:c.hdbYield;
   const m=META[state.sel];
-  document.getElementById("bfCard").style.borderLeftColor=m.color;
-  document.getElementById("bfCard").innerHTML=`
+  const el=document.getElementById("bfCard");
+  el.style.borderLeftColor=m.color;
+  el.innerHTML=`
     <div class="eyebrow">Unrecoverable-cost check (Ben Felix framework, SG-calibrated)</div>
-    <div style="font-size:13px;line-height:1.6">His "5% rule": renting beats owning when annual rent is below the owner's unrecoverable costs (tax + maintenance + cost of capital, net of appreciation). For <b>${m.label}</b> at current inputs:</div>
-    <div style="margin-top:10px">
-      <div class="bfrow"><span>tax + maintenance + insurance</span><span>${fmtPct(taxMaint)}</span></div>
-      <div class="bfrow"><span>cost of capital (${Math.round(ltv*100)}% debt @ ${fmtPct(debtCost)} + equity @ ${fmtPct(eqOpp)})</span><span>${fmtPct(capCost)}</span></div>
-      <div class="bfrow"><span>less: historical price growth</span><span>−${fmtPct(growthP)}</span></div>
-      <div class="bfrow bftot"><span>breakeven rent yield</span><span style="color:${gy>=unrec?"var(--hdb)":"var(--red)"}">${fmtPct(unrec)}</span></div>
-      <div class="bfrow"><span>actual gross rental yield</span><span>${fmtPct(gy)}</span></div>
+    <div style="font-size:13px;line-height:1.6">Renting beats owning when annual rent is below the owner's unrecoverable costs. For <b>${m.label}</b> at current inputs:</div>
+    <div style="margin-top:10px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;line-height:2">
+      <div style="display:flex;justify-content:space-between"><span>tax + maintenance + insurance</span><span>${fmtPct(taxMaint)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span>cost of capital (${Math.round(ltv*100)}% debt @ ${fmtPct(debtCost)} + equity @ ${fmtPct(eqOpp)})</span><span>${fmtPct(capCost)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span>less: historical price growth</span><span>−${fmtPct(growthP)}</span></div>
+      <div style="display:flex;justify-content:space-between;border-top:1px solid var(--line);font-weight:600"><span>breakeven rent yield</span><span style="color:${gy>=unrec?"var(--hdb)":"var(--red)"}">${fmtPct(unrec)}</span></div>
+      <div style="display:flex;justify-content:space-between"><span>actual gross rental yield</span><span>${fmtPct(gy)}</span></div>
     </div>
-    <div class="note" style="margin-top:8px">${gy>=unrec
-      ?"Yield exceeds unrecoverable cost: owning is cheaper than renting the same home under these inputs."
-      :"Yield falls short of unrecoverable cost: renting the same home is cheaper under these inputs."}
-      Canada's version leans on the CGT exemption; in Singapore neither asset is taxed on gains, so the decision rests on leverage cost, CPF constraints, and yields.</div>`;
+    <div class="note">${gy>=unrec?"Yield exceeds unrecoverable cost: owning the same home is cheaper than renting it under these inputs.":"Yield falls short of unrecoverable cost: renting the same home is cheaper under these inputs."} Canada's version leans on the CGT exemption; Singapore taxes neither asset, so the decision rests on leverage cost, CPF constraints, and yields.</div>`;
 }
-
 function renderCosts(){
   const c=state.cfg, drag=c.ter+c.wht+c.txn;
   document.getElementById("assumpSummary").innerHTML=
-    `<b>Owner:</b> BSD (tiered), legal/misc ${fmtPct(c.buyCost)}, reno ${fmtSGD(c.reno)}, mortgage interest (${c.useHistBank?"historical bank rates by year":"flat "+fmtPct(c.bankRate)} / HDB ${fmtPct(c.hdbRate)}), property tax + S&CC/maintenance, fire + HPS insurance ${fmtPct(c.insurance)}, lease-decay drag ${fmtPct(c.leaseDecay)}, selling costs ${fmtPct(c.sellCost)}, CPF refund on ${Math.round(c.cpfShare*100)}% CPF-funded share. <b>Renter-investor:</b> rent + ${fmtPct(c.rentFriction,0)} friction, invests ${Math.round(c.investShare*100)}% of surplus; ETF TER ${fmtPct(c.ter,2)}, withholding ${fmtPct(c.wht,2)}, brokerage/FX ${fmtPct(c.txn,2)} (total drag ${fmtPct(drag,2)}).`;
+    `<b>Owner:</b> BSD (tiered), legal/misc ${fmtPct(c.buyCost)}, reno ${fmtSGD(c.reno)} (era-scaled), interest (${c.useHistBank?"historical bank rates":"flat "+fmtPct(c.bankRate)} / HDB ${fmtPct(c.hdbRate)}), tax + S&CC/maintenance, insurance ${fmtPct(c.insurance)}, lease decay ${fmtPct(c.leaseDecay)}, selling ${fmtPct(c.sellCost)}, CPF refund on ${Math.round(c.cpfShare*100)}% CPF-funded share. <b>Renter:</b> rent + ${fmtPct(c.rentFriction,0)} friction. <b>Both invest at:</b> benchmark minus TER ${fmtPct(c.ter,2)} + withholding ${fmtPct(c.wht,2)} + brokerage/FX ${fmtPct(c.txn,2)} = ${fmtPct(drag,2)} drag (Irish-UCITS profile, e.g. IWDA/VWRA).`;
   const g=cagr(S0.eqSGD,1995,2025),n=cagr(S.eqSGD,1995,2025);
   const gm=cagr(S0.mixSGD,1995,2025),nm=cagr(S.mixSGD,1995,2025);
-  const lost=1-Math.pow((1+n)/(1+g),30);
   document.getElementById("dragImpact").innerHTML=
-    `Cost drag impact, 1995–2025 (SGD): MSCI World ${fmtPct(g)} gross → <b>${fmtPct(n)}</b> net · 60/40 ${fmtPct(gm)} gross → <b>${fmtPct(nm)}</b> net. Over 30 years the drag compounds to ~${fmtPct(lost,0)} less terminal wealth.`;
+    `Cost drag impact, 1995–2025 (SGD): MSCI World ${fmtPct(g)} gross → <b>${fmtPct(n)}</b> net · 60/40 ${fmtPct(gm)} gross → <b>${fmtPct(nm)}</b> net · ≈${fmtPct(1-Math.pow((1+n)/(1+g),30),0)} less terminal wealth over 30 years.`;
 }
-
 const FIELDS=[
   ["hdbPrice","HDB price (2025 S$)",1,10000,""],["condoPrice","Condo price (2025 S$)",1,50000,""],
-  ["btoDiscount","BTO discount %",100,1,"%"],["grant","Housing grant S$",1,5000,""],
+  ["btoDiscount","BTO discount %",100,1,"%"],["grant","Grant, 2025 S$ (era-scaled)",1,5000,""],
+  ["budgetShare","Housing+invest budget, % income",100,1,"%"],
   ["hdbLTV","HDB loan LTV %",100,1,"%"],["condoLTV","Bank loan LTV %",100,1,"%"],
   ["hdbRate","HDB loan rate %",100,.1,"%"],["bankRate","Flat bank rate %",100,.1,"%"],
   ["tenure","Tenure (years)",1,1,""],
@@ -463,7 +618,7 @@ const FIELDS=[
   ["insurance","Insurance %/yr",100,.05,"%"],["reno","Renovation (2025 S$)",1,5000,""],
   ["leaseDecay","Lease-decay drag %/yr",100,.1,"%"],["buyCost","Buy legal/misc %",100,.1,"%"],
   ["sellCost","Selling cost %",100,.5,"%"],["rentFriction","Rent friction %",100,.5,"%"],
-  ["cpfShare","Downpayment from CPF %",100,5,"%"],["investShare","Renter invests surplus %",100,5,"%"],
+  ["cpfShare","Downpayment from CPF %",100,5,"%"],["investShare","Surplus actually invested %",100,5,"%"],
   ["ter","ETF TER %/yr",100,.01,"%"],["wht","Withholding drag %/yr",100,.01,"%"],["txn","Brokerage/FX %/yr",100,.01,"%"],
 ];
 function buildAssumpGrid(){
@@ -471,147 +626,120 @@ function buildAssumpGrid(){
   for(const [key,label,mult,step,suffix] of FIELDS){
     const lab=document.createElement("label");
     lab.innerHTML=`<span>${label}</span>`;
-    const wrap=document.createElement("span");
-    wrap.style.cssText="display:flex;align-items:center;gap:5px";
+    const w=document.createElement("span");
+    w.style.cssText="display:flex;align-items:center;gap:5px";
     const inp=document.createElement("input");
-    inp.type="number"; inp.step=step; inp.inputMode="decimal";
+    inp.type="number";inp.step=step;inp.inputMode="decimal";
     inp.value=+(state.cfg[key]*mult).toFixed(4);
     inp.oninput=()=>{const v=parseFloat(inp.value);if(!isNaN(v)){state.cfg[key]=v/mult;refresh(true,true);}};
-    wrap.appendChild(inp);
-    if(suffix){const s=document.createElement("span");s.textContent=suffix;s.style.cssText="font-family:'IBM Plex Mono',monospace;font-size:12px";wrap.appendChild(s);}
-    lab.appendChild(wrap); host.appendChild(lab);
+    w.appendChild(inp);
+    if(suffix){const s=document.createElement("span");s.textContent=suffix;s.style.cssText="font-family:'IBM Plex Mono',monospace;font-size:12px";w.appendChild(s);}
+    lab.appendChild(w);host.appendChild(lab);
   }
-  // segmented: bank rate basis
-  const segs=[
-    ["Bank rate basis","useHistBank",[{v:true,label:"Historical"},{v:false,label:"Flat"}]],
-    ["Renter's capital source","capitalSource",[{v:"cash",label:"Cash"},{v:"cpf",label:"CPF OA 2.5%"}]],
-  ];
+  const segs=[["Bank rate basis","useHistBank",[{v:true,label:"Historical"},{v:false,label:"Flat"}]],
+    ["Renter's capital source","capitalSource",[{v:"cash",label:"Cash"},{v:"cpf",label:"CPF OA 2.5%"}]]];
   for(const [label,key,opts] of segs){
     const div=document.createElement("div");
     div.innerHTML=`<div style="font-size:12px;color:var(--sub);margin-bottom:4px">${label}</div>`;
-    const s=document.createElement("div"); s.className="seg";
-    div.appendChild(s); host.appendChild(div);
-    seg(s,opts,state.cfg[key],v=>{state.cfg[key]=v;refresh(true,true);seg(s,opts,v,()=>{});buildAssumpGrid();});
+    const s=document.createElement("div");s.className="seg";
+    div.appendChild(s);host.appendChild(div);
+    seg(s,opts,state.cfg[key],v=>{state.cfg[key]=v;refresh(true,true);buildAssumpGrid();});
   }
 }
-
 function renderGrowth(){
   if(document.getElementById("ctxBody").style.display==="none")return;
-  let h=100,p=100,e=100,m=100,d=1;
+  let h=100,p=100,e=100,m=100;
   const labels=[1995],H=[100],P=[100],E=[100],M=[100];
   for(let y=1996;y<=2025;y++){
     h*=1+S.hdbR[y];p*=1+S.prvR[y];e*=1+S.eqSGD[y];m*=1+S.mixSGD[y];
-    d*=state.real?1+SG_CPI[y]/100:1;
-    labels.push(y);H.push(h/d);P.push(p/d);E.push(e/d);M.push(m/d);
+    labels.push(y);H.push(h);P.push(p);E.push(e);M.push(m);
   }
-  if(growthChart)growthChart.destroy();
-  growthChart=new Chart(document.getElementById("growthChart"),{
-    type:"line",
-    data:{labels,datasets:[
-      {label:"MSCI World (SGD, net)",data:E,borderColor:EQCOL,borderWidth:2.4,pointRadius:0,tension:.2},
-      {label:"60/40",data:M,borderColor:MIXCOL,borderWidth:1.5,pointRadius:0,tension:.2},
-      {label:"HDB index",data:H,borderColor:"#0E6E5C",borderWidth:2,pointRadius:0,tension:.2},
-      {label:"Private index",data:P,borderColor:"#B4690E",borderWidth:2,pointRadius:0,tension:.2},
-    ]},
-    options:{
-      responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
-      plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
-        tooltip:{callbacks:{label:i=>i.dataset.label+": S$"+Math.round(i.parsed.y*1000).toLocaleString("en-SG")}}},
-      scales:{
-        x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
-        y:{type:state.log?"logarithmic":"linear",
-           ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v>=1000?(v/1000).toFixed(1)+"M":Math.round(v)+"k"},
-           grid:{color:"#EDEFEA"}},
-      },
-    },
+  upsert("growthChart","line",{labels,datasets:[
+    {label:"MSCI World (SGD, net)",data:E,borderColor:EQCOL,borderWidth:2.4,pointRadius:0,tension:.2},
+    {label:"60/40",data:M,borderColor:MIXCOL,borderWidth:1.5,pointRadius:0,tension:.2},
+    {label:"HDB index",data:H,borderColor:"#0E6E5C",borderWidth:2,pointRadius:0,tension:.2},
+    {label:"Private index",data:P,borderColor:"#B4690E",borderWidth:2,pointRadius:0,tension:.2},
+  ]},{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
+      tooltip:{callbacks:{label:i=>i.dataset.label+": S$"+Math.round(i.parsed.y*1000).toLocaleString("en-SG")}}},
+    scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
+      y:{type:state.log?"logarithmic":"linear",
+        ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v>=1000?(v/1000).toFixed(1)+"M":Math.round(v)+"k"},
+        grid:{color:"#EDEFEA"}}},
   });
 }
 
-/* ================= WIRING ================= */
-const aff={tab:1,income:"ind",base:1995};
-let ptiChart=null,msrChart=null,idxChart=null;
+/* ================= TAB 2 RENDERERS ================= */
 const AFFY=[];for(let y=1995;y<=2025;y++)AFFY.push(y);
 const incomeMo=y=>WAGE[y]*(aff.income==="hh"?hhMult(y):1);
-const incomeLbl=()=>aff.income==="hh"?"household (est. 1.65–2.05× individual)":"individual median";
-
+const incomeLbl=()=>aff.income==="hh"?"household (est.)":"individual median";
 function priceOf(kind,y){
   const c=state.cfg;
   if(kind==="condo")return c.condoPrice*URA_PPI[y]/URA_PPI[2025];
   const p=c.hdbPrice*HDB_RPI[y]/HDB_RPI[2025];
-  return kind==="bto"?p*(1-c.btoDiscount)-c.grant:p;
+  return kind==="bto"?p*(1-c.btoDiscount)-c.grant*(HDB_RPI[y]/HDB_RPI[2025]):p;
 }
 const AFF_SERIES=[
-  {k:"bto",label:"BTO (net of grant)",color:"#2E9E7E"},
+  {k:"bto",label:"BTO (net of era-scaled grant)",color:"#2E9E7E"},
   {k:"hdb",label:"HDB resale",color:"#0E6E5C"},
   {k:"condo",label:"Private condo",color:"#B4690E"},
 ];
-
 function renderPTI(){
-  document.getElementById("ptiTitle").textContent=`Years of ${incomeLbl()} income to buy`;
-  if(ptiChart)ptiChart.destroy();
-  ptiChart=new Chart(document.getElementById("ptiChart"),{
-    type:"line",
-    data:{labels:AFFY,datasets:AFF_SERIES.map(s=>({
-      label:s.label,borderColor:s.color,borderWidth:2,pointRadius:0,tension:.2,
-      data:AFFY.map(y=>priceOf(s.k,y)/(incomeMo(y)*12)),
-    }))},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
-      plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
-        tooltip:{callbacks:{label:i=>i.dataset.label+": "+i.parsed.y.toFixed(1)+" years ("+fmtSGD(priceOf(AFF_SERIES[i.datasetIndex].k,AFFY[i.dataIndex]))+")"}}},
-      scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
-        y:{ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v+"y"},grid:{color:"#EDEFEA"}}}},
+  document.getElementById("ptiTitle").textContent="Years of income to buy";
+  document.getElementById("ptiReadout").textContent=`income: ${incomeLbl()}`;
+  upsert("ptiChart","line",{labels:AFFY,datasets:AFF_SERIES.map(s=>({
+    label:s.label,borderColor:s.color,borderWidth:2,pointRadius:0,tension:.2,
+    data:AFFY.map(y=>priceOf(s.k,y)/(incomeMo(y)*12)),
+  }))},{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
+      tooltip:{callbacks:{label:i=>i.dataset.label+": "+i.parsed.y.toFixed(1)+" years"}}},
+    scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
+      y:{ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v+"y"},grid:{color:"#EDEFEA"}}},
   });
 }
-
 function renderMSR(){
   const c=state.cfg;
-  document.getElementById("msrTitle").textContent=`Mortgage servicing ratio · % of ${incomeLbl()} monthly income`;
+  document.getElementById("msrTitle").textContent="Mortgage servicing ratio · % of monthly income";
+  document.getElementById("msrReadout").textContent=`income: ${incomeLbl()} · LTV ${Math.round(c.hdbLTV*100)}/${Math.round(c.condoLTV*100)}% · ${c.tenure}y`;
   const pmt=(loan,rate,yrs)=>{const m=rate/12,n=yrs*12;return m===0?loan/n:loan*m/(1-Math.pow(1+m,-n));};
-  const dsets=AFF_SERIES.map(s=>({
-    label:s.label,borderColor:s.color,borderWidth:2,pointRadius:0,tension:.2,
+  const ds=AFF_SERIES.map(s=>({label:s.label,borderColor:s.color,borderWidth:2,pointRadius:0,tension:.2,
     data:AFFY.map(y=>{
       const isC=s.k==="condo";
-      const loan=(isC?c.condoLTV:c.hdbLTV)*priceOf(s.k==="bto"?"bto":s.k,y);
-      const rate=isC?BANK_RATE[y]/100:c.hdbRate;
-      return 100*pmt(Math.max(0,loan),rate,c.tenure)/incomeMo(y);
-    }),
-  }));
-  dsets.push({label:"30% MSR ceiling",borderColor:"#C81E3C",borderWidth:1.5,borderDash:[6,4],pointRadius:0,data:AFFY.map(()=>30)});
-  if(msrChart)msrChart.destroy();
-  msrChart=new Chart(document.getElementById("msrChart"),{
-    type:"line",data:{labels:AFFY,datasets:dsets},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
-      plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
-        tooltip:{callbacks:{label:i=>i.dataset.label+": "+i.parsed.y.toFixed(1)+"%"}}},
-      scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
-        y:{ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v+"%"},grid:{color:"#EDEFEA"}}}},
+      const loan=(isC?c.condoLTV:c.hdbLTV)*Math.max(0,priceOf(s.k,y));
+      return 100*pmt(loan,isC?BANK_RATE[y]/100:c.hdbRate,c.tenure)/incomeMo(y);
+    })}));
+  ds.push({label:"30% MSR ceiling",borderColor:"#C81E3C",borderWidth:1.5,borderDash:[6,4],pointRadius:0,data:AFFY.map(()=>30)});
+  upsert("msrChart","line",{labels:AFFY,datasets:ds},{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
+      tooltip:{callbacks:{label:i=>i.dataset.label+": "+i.parsed.y.toFixed(1)+"%"}}},
+    scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
+      y:{ticks:{font:{family:"IBM Plex Mono",size:10},callback:v=>v+"%"},grid:{color:"#EDEFEA"}}},
   });
 }
-
 function renderIdx(){
   const b=aff.base;
   document.getElementById("idxTitle").textContent=`Wages vs prices vs CPI · rebased to 100 in ${b}`;
-  let cpi={};let f=100;cpi[1995]=100;
+  document.getElementById("idxReadout").textContent=`base: ${b} · income: ${incomeLbl()}`;
+  const cpi={};let f=100;cpi[1995]=100;
   for(let y=1996;y<=2025;y++){f*=1+SG_CPI[y]/100;cpi[y]=f;}
-  const rb=obj=>AFFY.map(y=>100*obj[y]/obj[b]);
-  const wage={};AFFY.forEach(y=>wage[y]=WAGE[y]*(aff.income==="hh"?hhMult(y):1));
-  if(idxChart)idxChart.destroy();
-  idxChart=new Chart(document.getElementById("idxChart"),{
-    type:"line",
-    data:{labels:AFFY,datasets:[
-      {label:"Median income ("+(aff.income==="hh"?"household est.":"individual")+")",data:rb(wage),borderColor:"#2E4FD8",borderWidth:2.4,pointRadius:0,tension:.2},
-      {label:"HDB resale index",data:rb(HDB_RPI),borderColor:"#0E6E5C",borderWidth:2,pointRadius:0,tension:.2},
-      {label:"Private index",data:rb(URA_PPI),borderColor:"#B4690E",borderWidth:2,pointRadius:0,tension:.2},
-      {label:"CPI",data:rb(cpi),borderColor:"#6B7A99",borderWidth:1.5,borderDash:[4,3],pointRadius:0,tension:.2},
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
-      plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
-        tooltip:{callbacks:{label:i=>i.dataset.label+": "+Math.round(i.parsed.y)}}},
-      scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
-        y:{ticks:{font:{family:"IBM Plex Mono",size:10}},grid:{color:"#EDEFEA"}}}},
+  const wage={};AFFY.forEach(y=>wage[y]=incomeMo(y));
+  const rb=o=>AFFY.map(y=>100*o[y]/o[b]);
+  upsert("idxChart","line",{labels:AFFY,datasets:[
+    {label:"Median income ("+(aff.income==="hh"?"household est.":"individual")+")",data:rb(wage),borderColor:EQCOL,borderWidth:2.4,pointRadius:0,tension:.2},
+    {label:"HDB resale index",data:rb(HDB_RPI),borderColor:"#0E6E5C",borderWidth:2,pointRadius:0,tension:.2},
+    {label:"Private index",data:rb(URA_PPI),borderColor:"#B4690E",borderWidth:2,pointRadius:0,tension:.2},
+    {label:"CPI",data:rb(cpi),borderColor:MIXCOL,borderWidth:1.5,borderDash:[4,3],pointRadius:0,tension:.2},
+  ]},{
+    responsive:true,maintainAspectRatio:false,interaction:{mode:"index",intersect:false},
+    plugins:{legend:{labels:{font:{size:11},boxWidth:14}},
+      tooltip:{callbacks:{label:i=>i.dataset.label+": "+Math.round(i.parsed.y)}}},
+    scales:{x:{ticks:{font:{family:"IBM Plex Mono",size:10},maxTicksLimit:7},grid:{display:false}},
+      y:{ticks:{font:{family:"IBM Plex Mono",size:10}},grid:{color:"#EDEFEA"}}},
   });
 }
-
 function renderAffStats(){
   const wG=Math.pow(WAGE[2025]/WAGE[1995],1/30)-1;
   let f=1;for(let y=1996;y<=2025;y++)f*=1+SG_CPI[y]/100;
@@ -622,38 +750,55 @@ function renderAffStats(){
   document.getElementById("affStats").innerHTML=`
     <div class="eyebrow">Full period 1995–2025 · CAGR</div>
     <div class="grid2">
-      <div><div class="lbl">Median income (nominal)</div><div class="big" style="color:#2E4FD8">${fmtPct(wG)}</div></div>
-      <div><div class="lbl">CPI inflation</div><div class="big" style="color:#6B7A99">${fmtPct(cpiG)}</div></div>
+      <div><div class="lbl">Median income (nominal)</div><div class="big" style="color:${EQCOL}">${fmtPct(wG)}</div></div>
+      <div><div class="lbl">CPI inflation</div><div class="big" style="color:${MIXCOL}">${fmtPct(cpiG)}</div></div>
       <div><div class="lbl">Real income growth</div><div class="big">${fmtPct((1+wG)/(1+cpiG)-1)}</div></div>
       <div><div class="lbl">Real HDB / private price growth</div><div class="big">${fmtPct((1+hG)/(1+cpiG)-1)} / ${fmtPct((1+pG)/(1+cpiG)-1)}</div></div>
-      <div><div class="lbl">HDB resale price-to-income, 1995</div><div class="big" style="color:#0E6E5C">${pti95.toFixed(1)} yrs</div></div>
+      <div><div class="lbl">HDB price-to-income, 1995</div><div class="big" style="color:#0E6E5C">${pti95.toFixed(1)} yrs</div></div>
       <div><div class="lbl">Same, 2025</div><div class="big" style="color:#0E6E5C">${pti25.toFixed(1)} yrs</div></div>
     </div>
-    <div class="note" style="margin-top:8px">Over the full 30 years, median incomes (${fmtPct(wG)}/yr) outgrew both HDB (${fmtPct(hG)}/yr) and private (${fmtPct(pG)}/yr) prices — the affordability squeeze is concentrated in specific sub-periods (1993–96, 2007–13, 2020–24), which the base-year selector above makes visible.</div>`;
+    <div class="note" style="margin-top:8px">Incomes (${fmtPct(wG)}/yr) outgrew both HDB (${fmtPct(hG)}/yr) and private (${fmtPct(pG)}/yr) indices over the full 30 years — the squeeze is episodic (1993–96, 2007–13, 2020–24), which the base-year selector makes visible. Caveats in the Analysis tab.</div>`;
 }
-
 function renderAff(){renderPTI();renderMSR();renderIdx();renderAffStats();}
 function renderAffControls(){
-  seg(document.getElementById("segIncome"),[{v:"ind",label:"Individual"},{v:"hh",label:"Household (est.)"}],aff.income,v=>{aff.income=v;renderAffControls();renderAff();});
+  seg(document.getElementById("segIncome"),[{v:"hh",label:"Household (est.)"},{v:"ind",label:"Individual"}],aff.income,v=>{aff.income=v;renderAffControls();renderAff();});
   seg(document.getElementById("segBase"),[1995,2000,2006,2013,2019].map(y=>({v:y,label:String(y)})),aff.base,v=>{aff.base=v;renderAffControls();renderIdx();});
+}
+
+/* ================= TAB 3 (static, rendered once) ================= */
+function renderForce(){
+  const buy=[["BTO discount + grants: one-time state transfer",95],
+    ["CPF: alternative return on housing money is 2.5%, not ~8%",85],
+    ["HDB loan at 2.6% + mortgage as forced saving",65],
+    ["Rent avoided ≈ 5% yield vs ~4–5% all-in cost of owning",45]];
+  const rent=[["Unlevered SG property lags world equities by ~4–5%/yr",90],
+    ["ABSD makes the 2nd property punitive: marginal dollar → ETFs",70],
+    ["99-year lease decay + single-flat dispersion risk",55],
+    ["Stamp duties + illiquidity + CPF-locked proceeds",40]];
+  document.getElementById("forceDiag").innerHTML=
+    `<div style="display:flex;justify-content:space-between;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;margin-bottom:6px"><span style="color:var(--hdb)">← pushes BUY (first home)</span><span style="color:var(--eq)">pushes RENT + INVEST →</span></div>`+
+    buy.map(([l,w])=>`<div class="frow"><div class="fhalf fL"><div class="fbar" style="width:${w}%;background:var(--hdb);opacity:.85"></div></div><div class="fhalf flbl">${l}</div></div>`).join("")+
+    rent.map(([l,w])=>`<div class="frow"><div class="fhalf flbl" style="text-align:right">${l}</div><div class="fhalf"><div class="fbar" style="width:${w}%;background:var(--eq);opacity:.75"></div></div></div>`).join("");
+}
+
+/* ================= WIRING ================= */
+function refresh(recalc){
+  if(recalc)recompute();
+  renderAsmp();renderControls();renderStrips();renderSpread();renderAudit();renderWaterfall();
+  renderMatrix();renderBF();renderCosts();renderGrowth();
+  if(aff.tab===2)renderAff();
 }
 function switchTab(n){
   aff.tab=n;
-  document.getElementById("tab1").style.display=n===1?"block":"none";
-  document.getElementById("tab2").style.display=n===2?"block":"none";
-  document.getElementById("tabBtn1").className=n===1?"on":"";
-  document.getElementById("tabBtn2").className=n===2?"on":"";
+  for(const i of [1,2,3]){
+    document.getElementById("tab"+i).style.display=n===i?"block":"none";
+    document.getElementById("tabBtn"+i).className=n===i?"on":"";
+  }
   if(n===2){renderAffControls();renderAff();}
 }
 document.getElementById("tabBtn1").onclick=()=>switchTab(1);
 document.getElementById("tabBtn2").onclick=()=>switchTab(2);
-
-function refresh(recalc,keepGrid){
-  if(recalc)recompute();
-  renderControls();renderStrips();renderSpread();renderDetail();renderMatrix();renderBF();renderCosts();renderGrowth();
-  if(aff.tab===2)renderAff();
-  if(!keepGrid&&document.getElementById("assumpGrid").style.display!=="none"){/* grid persists; inputs hold their own values */}
-}
+document.getElementById("tabBtn3").onclick=()=>switchTab(3);
 document.getElementById("assumpBtn").onclick=function(){
   const g=document.getElementById("assumpGrid");
   const open=g.style.display==="none";
@@ -669,9 +814,11 @@ document.getElementById("ctxBtn").onclick=function(){
   if(open)renderGrowth();
 };
 document.getElementById("logBtn").onclick=function(){
-  state.log=!state.log;this.textContent=state.log?"log scale":"linear scale";renderGrowth();
+  state.log=!state.log;this.textContent=state.log?"log scale":"linear scale";
+  if(charts.growthChart){charts.growthChart.config.options.scales.y.type=state.log?"logarithmic":"linear";charts.growthChart.update();}
 };
 
+renderForce();
 recompute();refresh(false);
 </script>
 </body>
